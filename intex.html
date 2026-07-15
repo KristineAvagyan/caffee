@@ -1,1 +1,476 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aroma Café - Premium Coffee Experience</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Lato', 'Noto Sans SC', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Language Switcher Styles */
+        .lang-btn {
+            transition: all 0.3s ease;
+        }
+        .lang-btn.active {
+            background-color: #78350f; /* Coffee Brown */
+            color: white;
+            border-color: #78350f;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #78350f;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-bold text-amber-900 flex items-center gap-2 serif-font">
+                <i class="fa-solid fa-mug-hot"></i>
+                <span data-i18n="brandName">Aroma Café</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="hover:text-amber-800 transition-colors font-medium" data-i18n="navHome">Home</a>
+                <a href="#about" class="hover:text-amber-800 transition-colors font-medium" data-i18n="navAbout">Our Story</a>
+                <a href="#menu" class="hover:text-amber-800 transition-colors font-medium" data-i18n="navMenu">Menu</a>
+                <a href="#contact" class="hover:text-amber-800 transition-colors font-medium" data-i18n="navContact">Visit Us</a>
+            </div>
+
+            <!-- Language Switcher & CTA -->
+            <div class="flex items-center gap-4">
+                <div class="flex bg-stone-100 rounded-lg p-1 border border-stone-200">
+                    <button onclick="changeLanguage('en')" class="lang-btn active px-3 py-1 rounded-md text-xs font-semibold text-stone-600 hover:bg-stone-200" id="btn-en">EN</button>
+                    <button onclick="changeLanguage('hy')" class="lang-btn px-3 py-1 rounded-md text-xs font-semibold text-stone-600 hover:bg-stone-200" id="btn-hy">HY</button>
+                    <button onclick="changeLanguage('zh')" class="lang-btn px-3 py-1 rounded-md text-xs font-semibold text-stone-600 hover:bg-stone-200" id="btn-zh">中文</button>
+                </div>
+                
+                <a href="#menu" class="hidden md:block bg-amber-800 text-white px-6 py-2 rounded-full font-medium hover:bg-amber-900 transition-colors shadow-lg shadow-amber-800/30" data-i18n="ctaOrder">
+                    Order Online
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-stone-600 text-xl" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t absolute w-full left-0 top-full shadow-lg">
+            <div class="flex flex-col p-4 space-y-4">
+                <a href="#home" class="block text-stone-600 hover:text-amber-800" data-i18n="navHome">Home</a>
+                <a href="#about" class="block text-stone-600 hover:text-amber-800" data-i18n="navAbout">Our Story</a>
+                <a href="#menu" class="block text-stone-600 hover:text-amber-800" data-i18n="navMenu">Menu</a>
+                <a href="#contact" class="block text-stone-600 hover:text-amber-800" data-i18n="navContact">Visit Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80" 
+                 alt="Coffee Shop Interior" 
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center text-white">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up drop-shadow-lg" data-i18n="heroTitle">
+                Brewed with Passion
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto animate-fade-in-up font-light" style="animation-delay: 0.2s;" data-i18n="heroSubtitle">
+                Experience the finest artisanal coffee in a cozy atmosphere.
+            </p>
+            
+            <div class="animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="#menu" class="bg-amber-700 hover:bg-amber-800 text-white px-10 py-4 rounded-full font-semibold transition-all transform hover:scale-105 shadow-xl inline-flex items-center gap-2">
+                    <span data-i18n="viewMenuBtn">View Menu</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-full h-full border-2 border-amber-200 rounded-2xl z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e7385a861?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Barista pouring coffee" class="rounded-2xl shadow-xl relative z-10 w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h4 class="text-amber-700 font-bold uppercase tracking-widest text-sm mb-2" data-i18n="aboutTag">Since 2015</h4>
+                    <h2 class="text-4xl font-bold text-stone-800 mb-6 serif-font" data-i18n="aboutTitle">More Than Just Coffee</h2>
+                    <p class="text-stone-600 mb-6 leading-relaxed" data-i18n="aboutDesc1">
+                        At Aroma Café, we believe that every cup tells a story. We source our beans directly from sustainable farms in Ethiopia, Colombia, and Brazil.
+                    </p>
+                    <p class="text-stone-600 mb-8 leading-relaxed" data-i18n="aboutDesc2">
+                        Our master roasters bring out the unique flavor profiles of each batch, ensuring you get the perfect brew every time. Whether you're here for a quick espresso or a lazy afternoon with a book, we welcome you.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-leaf text-green-600 text-2xl"></i>
+                            <span class="font-semibold text-stone-700" data-i18n="feat1">Organic Beans</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-heart text-red-500 text-2xl"></i>
+                            <span class="font-semibold text-stone-700" data-i18n="feat2">Made with Love</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-stone-100">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-stone-800 mb-4 serif-font" data-i18n="menuTitle">Our Favorites</h2>
+                <div class="w-20 h-1 bg-amber-700 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden menu-card group cursor-pointer">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cappuccino" class="w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-stone-800">Classic Cappuccino</h3>
+                            <span class="text-amber-700 font-bold">$4.50</span>
+                        </div>
+                        <p class="text-stone-500 text-sm" data-i18n="item1Desc">Rich espresso with steamed milk foam.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden menu-card group cursor-pointer">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Cold Brew" class="w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-stone-800">Nitro Cold Brew</h3>
+                            <span class="text-amber-700 font-bold">$5.00</span>
+                        </div>
+                        <p class="text-stone-500 text-sm" data-i18n="item2Desc">Smooth, cold-steeped coffee infused with nitrogen.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden menu-card group cursor-pointer">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Croissant" class="w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-stone-800">Butter Croissant</h3>
+                            <span class="text-amber-700 font-bold">$3.50</span>
+                        </div>
+                        <p class="text-stone-500 text-sm" data-i18n="item3Desc">Freshly baked, flaky, and buttery perfection.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden menu-card group cursor-pointer">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1598155523122-38423bb4d6c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Matcha Latte" class="w-full h-full object-cover transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-stone-800">Matcha Latte</h3>
+                            <span class="text-amber-700 font-bold">$5.50</span>
+                        </div>
+                        <p class="text-stone-500 text-sm" data-i18n="item4Desc">Premium Japanese matcha with oat milk.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-amber-800 text-amber-800 px-8 py-3 rounded-full font-semibold hover:bg-amber-800 hover:text-white transition-colors" data-i18n="fullMenuBtn">
+                    View Full Menu
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial / Atmosphere -->
+    <section class="py-20 bg-amber-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/coffee.png')]"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <i class="fa-solid fa-quote-left text-4xl text-amber-400 mb-6"></i>
+            <h3 class="text-2xl md:text-3xl font-serif italic mb-8 max-w-3xl mx-auto leading-relaxed" data-i18n="testimonial">
+                "The best place in the city to unwind. The aroma of fresh coffee hits you the moment you walk in, and the pastries are simply divine."
+            </h3>
+            <div class="flex items-center justify-center gap-4">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Customer" class="w-12 h-12 rounded-full border-2 border-amber-400">
+                <div class="text-left">
+                    <p class="font-bold">Sarah Jenkins</p>
+                    <p class="text-amber-300 text-sm">Local Food Blogger</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact / Footer -->
+    <footer id="contact" class="bg-stone-900 text-stone-300 pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <a href="#" class="text-2xl font-bold text-white flex items-center gap-2 mb-4 serif-font">
+                        <i class="fa-solid fa-mug-hot text-amber-600"></i>
+                        <span data-i18n="brandName">Aroma Café</span>
+                    </a>
+                    <p class="text-sm leading-relaxed opacity-80 mb-6" data-i18n="footerDesc">
+                        Serving happiness in a cup since 2015. Visit us for a break from the busy world.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-amber-600 hover:text-white transition-all">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-amber-600 hover:text-white transition-all">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-stone-800 flex items-center justify-center hover:bg-amber-600 hover:text-white transition-all">
+                            <i class="fa-brands fa-weixin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hours -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-lg" data-i18n="hoursTitle">Opening Hours</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between border-b border-stone-800 pb-2">
+                            <span data-i18n="weekdays">Mon - Fri</span>
+                            <span>7:00 AM - 8:00 PM</span>
+                        </li>
+                        <li class="flex justify-between border-b border-stone-800 pb-2">
+                            <span data-i18n="saturday">Saturday</span>
+                            <span>8:00 AM - 9:00 PM</span>
+                        </li>
+                        <li class="flex justify-between border-b border-stone-800 pb-2">
+                            <span data-i18n="sunday">Sunday</span>
+                            <span>8:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 text-lg" data-i18n="contactTitle">Find Us</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-amber-600 mt-1"></i>
+                            <span>123 Coffee Lane, Yerevan Center<br>Armenia</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-amber-600"></i>
+                            <span>+374 99 123456</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-amber-600"></i>
+                            <span>hello@aromacafe.am</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-stone-800 pt-8 text-center text-sm opacity-60">
+                <p>&copy; 2026 Aroma Café. <span data-i18n="footerRights">All rights reserved.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Translations and Interactivity -->
+    <script>
+        // Translation Data
+        const translations = {
+            en: {
+                brandName: "Aroma Café",
+                navHome: "Home",
+                navAbout: "Our Story",
+                navMenu: "Menu",
+                navContact: "Visit Us",
+                ctaOrder: "Order Online",
+                heroTitle: "Brewed with Passion",
+                heroSubtitle: "Experience the finest artisanal coffee in a cozy atmosphere.",
+                viewMenuBtn: "View Menu",
+                aboutTag: "Since 2015",
+                aboutTitle: "More Than Just Coffee",
+                aboutDesc1: "At Aroma Café, we believe that every cup tells a story. We source our beans directly from sustainable farms in Ethiopia, Colombia, and Brazil.",
+                aboutDesc2: "Our master roasters bring out the unique flavor profiles of each batch, ensuring you get the perfect brew every time. Whether you're here for a quick espresso or a lazy afternoon with a book, we welcome you.",
+                feat1: "Organic Beans",
+                feat2: "Made with Love",
+                menuTitle: "Our Favorites",
+                item1Desc: "Rich espresso with steamed milk foam.",
+                item2Desc: "Smooth, cold-steeped coffee infused with nitrogen.",
+                item3Desc: "Freshly baked, flaky, and buttery perfection.",
+                item4Desc: "Premium Japanese matcha with oat milk.",
+                fullMenuBtn: "View Full Menu",
+                testimonial: "\"The best place in the city to unwind. The aroma of fresh coffee hits you the moment you walk in, and the pastries are simply divine.\"",
+                footerDesc: "Serving happiness in a cup since 2015. Visit us for a break from the busy world.",
+                hoursTitle: "Opening Hours",
+                weekdays: "Mon - Fri",
+                saturday: "Saturday",
+                sunday: "Sunday",
+                contactTitle: "Find Us",
+                footerRights: "All rights reserved."
+            },
+            hy: {
+                brandName: "Արոմա Սուրճ",
+                navHome: "Գլխավոր",
+                navAbout: "Մեր Պատմությունը",
+                navMenu: "Մենյու",
+                navContact: "Հասցե",
+                ctaOrder: "Պատվիրել",
+                heroTitle: "Պատրաստված Սիրով",
+                heroSubtitle: "Վայելեք լավագույն արհեստագործական սուրճը հարմարավետ մթնոլորտում։",
+                viewMenuBtn: "Դիտել Մենյուն",
+                aboutTag: "2015-ից",
+                aboutTitle: "Ավելին, քան պարզապես սուրճ",
+                aboutDesc1: "Արոմա Սուրճում մենք հավատում ենք, որ յուրաքանչյուր բաժակ պատմություն է պատմում։ Մենք մեր սուրճի հատիկները ներմուծում ենք Եթովպիայի, Կոլումբիայի և Բրազիլիայի կայուն ֆերմաներից։",
+                aboutDesc2: "Մեր վարպետները բացահայտում են յուրաքանչյուր խմբաքանակի յուրահատուկ համային հատկանիշները, ապահովելով կատարյալ ըմպելիք։ Լինի դա արագ էսպրեսսո, թե գրքի հետ անցկացվող հանգիստ կեսօր, մենք սիրով սպասում ենք ձեզ։",
+                feat1: "Օրգանական Հատիկներ",
+                feat2: "Պատրաստված Սիրով",
+                menuTitle: "Մեր Սիրելիները",
+                item1Desc: "Հարուստ էսպրեսսո գոլորշեպատված կաթի փրփուրով։",
+                item2Desc: "Հարթ, սառը եփված սուրճ ազոտի հավելումով։",
+                item3Desc: "Թարջ թխված, շերտավոր և կարագային կատարելություն։",
+                item4Desc: "Պրեմիում ճապոնական մատչա վարսակի կաթով։",
+                fullMenuBtn: "Դիտել Ամբողջական Մենյուն",
+                testimonial: "\"Քաղաքի լավագույն վայրը հանգստանալու համար։ Թարմ սուրճի բույրը քեզ դիմավորում է հենց ներս մտնելիս, իսկ հրուշակեղենը պարզապես աստվածային է։\"",
+                footerDesc: "Երջանկություն բաժակի մեջ՝ 2015-ից։ Այցելեք մեզ աշխարհի աղմուկից հեռանալու համար։",
+                hoursTitle: "Աշխատանքային ժամեր",
+                weekdays: "Երկ - Ուրբ",
+                saturday: "Շաբաթ",
+                sunday: "Կիրակի",
+                contactTitle: "Գտեք Մեզ",
+                footerRights: "Բոլոր իրավունքները պաշտպանված են։"
+            },
+            zh: {
+                brandName: "香气咖啡馆",
+                navHome: "首页",
+                navAbout: "我们的故事",
+                navMenu: "菜单",
+                navContact: "联系我们",
+                ctaOrder: "在线点单",
+                heroTitle: "用心冲泡",
+                heroSubtitle: "在舒适的氛围中体验最优质的手工咖啡。",
+                viewMenuBtn: "查看菜单",
+                aboutTag: "始于2015年",
+                aboutTitle: "不仅仅是咖啡",
+                aboutDesc1: "在香气咖啡馆，我们相信每一杯咖啡都有一个故事。我们的咖啡豆直接采购自埃塞俄比亚、哥伦比亚和巴西的可持续农场。",
+                aboutDesc2: "我们的烘焙大师释放出每批咖啡豆独特的风味特征，确保您每次都能享受到完美的冲泡。无论您是来喝一杯快速浓缩咖啡，还是带着书度过一个慵懒的下午，我们都欢迎您。",
+                feat1: "有机咖啡豆",
+                feat2: "用心制作",
+                menuTitle: "精选推荐",
+                item1Desc: "浓郁的意式浓缩咖啡配蒸奶泡。",
+                item2Desc: "顺滑的冷萃咖啡，注入氮气。",
+                item3Desc: "新鲜烘烤，酥脆且充满黄油香气的完美牛角包。",
+                item4Desc: "优质日本抹茶配燕麦奶。",
+                fullMenuBtn: "查看完整菜单",
+                testimonial: "\"城里放松身心的最佳去处。一走进门就能闻到新鲜咖啡的香气，糕点更是美味至极。\"",
+                footerDesc: "自2015年以来，为您提供杯中的幸福。来访我们，从繁忙的世界中抽身休息。",
+                hoursTitle: "营业时间",
+                weekdays: "周一至周五",
+                saturday: "周六",
+                sunday: "周日",
+                contactTitle: "寻找我们",
+                footerRights: "版权所有。"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update Buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+
+            // Update Text Content
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.replace('py-4', 'py-2');
+            } else {
+                navbar.classList.remove('shadow-md');
+                navbar.classList.replace('py-2', 'py-4');
+            }
+        });
+    </script>
+</body>
+</html>
